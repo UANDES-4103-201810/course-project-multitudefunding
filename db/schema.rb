@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20180411171235) do
     t.string "email"
     t.string "nickname"
     t.string "password"
-    t.string "type"
+    t.string "type_access"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
