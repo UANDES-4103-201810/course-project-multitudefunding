@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411143718) do
+ActiveRecord::Schema.define(version: 20180506000014) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -18,15 +18,79 @@ ActiveRecord::Schema.define(version: 20180411143718) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_backers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.integer "amount_invested"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_backers_on_project_id"
+    t.index ["user_id"], name: "index_project_backers_on_user_id"
+  end
+
+  create_table "project_creators", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.boolean "owner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_creators_on_project_id"
+    t.index ["user_id"], name: "index_project_creators_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "approved_by"
+    t.integer "money_goal"
+    t.datetime "finish_date"
+    t.text "description"
+    t.boolean "approved"
+    t.float "rating"
+    t.boolean "founded"
+    t.datetime "foundation_date"
+    t.datetime "approval_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "promise_buyers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "promise_id"
+    t.integer "amount_invested"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promise_id"], name: "index_promise_buyers_on_promise_id"
+    t.index ["user_id"], name: "index_promise_buyers_on_user_id"
+  end
+
+  create_table "promises", force: :cascade do |t|
+    t.integer "project_id"
+    t.text "decription"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_promises_on_project_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
-    t.string "email"
     t.string "nickname"
-    t.string "password"
-    t.string "type_access"
+    t.string "phone_number"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

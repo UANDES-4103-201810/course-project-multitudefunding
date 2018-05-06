@@ -1,2 +1,28 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+        <head>
+                <style> 
+                footer {
+                    float: right;
+                    height: 35px;
+                    margin: 0px 50px 0px 0px;
+                    background: #9FF;
+                    color: #000;
+                    text-align: right;
+                    padding: 10px 30px;
+                    width: 180px;
+                }
+                </style>                        
+                <title>Multitude Funding</title>
+        </head>
+        <body>
+                <h1>Multitude Funding</h1>
+                <ul>
+                        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+ 			<% if user_signed_in? %>
+			  <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+			<%else %>
+			  <li><%= link_to('Login', new_user_session_path) %></li>
+			<% end %>
+                </ul>
+                <footer><p>Sebastian Baixas<br/>
+                   Ignacio Carril</p></footer>
+        </body>
