@@ -28,9 +28,8 @@
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><%= link_to('Projects', '#') %></li>
+					<li><%= link_to('Projects', project_show_project_path) %></li>
 					<li><%= link_to('Promises', '#') %></li>
-					<li><%= link_to('', '#') %></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<% if user_signed_in? %>
@@ -44,6 +43,7 @@
 			</div><!--/.nav-collapse -->
 		</div><!--/.container-fluid -->
 	</nav>
+
     <%= yield %>
   </body>
 </html>
