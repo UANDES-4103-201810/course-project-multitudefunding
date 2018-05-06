@@ -8,9 +8,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" class="bootstrap" type="text/css" href="./app/assets/stylesheets/bootstrap.css"/>
-    <link rel="stylesheet" class="bootstrap-grid" type="text/css" href="./app/assets/stylesheets/bootstrap-grid.css"/>
-    <link rel="stylesheet" class="bootstrap-reboot" type="text/css" href="./app/assets/stylesheets/bootstrap-reboot.css"/>
   </head>
 
   <body class="text-center">
@@ -28,9 +25,8 @@
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><%= link_to('Projects', '#') %></li>
+					<li><%= link_to('Projects', project_show_project_path) %></li>
 					<li><%= link_to('Promises', '#') %></li>
-					<li><%= link_to('', '#') %></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<% if user_signed_in? %>
@@ -45,6 +41,7 @@
 		</div><!--/.container-fluid -->
 
 	</nav>
+
     <%= yield %>
   </body>
 </html>
