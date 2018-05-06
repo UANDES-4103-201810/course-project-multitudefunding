@@ -34,6 +34,7 @@ gem 'devise'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '~> 3.2.0'
+gem 'rails_bootstrap_navbar'
 gem 'autoprefixer-rails'
 gem 'jquery-rails'
 group :development, :test do
