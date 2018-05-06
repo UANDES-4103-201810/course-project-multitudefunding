@@ -1,8 +1,6 @@
         <head>                      
                 <title>Multitude Funding</title>
         </head>
-        <body>
-                <h1>Multitude Funding</h1>
                 <ul>
                         <li><%= link_to 'Sign Up', new_user_registration_path %></li>
  			<% if user_signed_in? %>
@@ -11,6 +9,9 @@
 			  <li><%= button_to('Login', new_user_session_path, class: "btn btn-primary") %></li>
 			<% end %>
                 </ul>
-                <footer><p>Sebastian Baixas<br/>
-                   Ignacio Carril</p></footer>
-        </body>
+								<footer class="footer">
+									<div class="container">
+                								<span class="text-muted"><p>Sebastian Baixas<br/>
+                								Ignacio Carril</p></span>
+									</div>
+								</footer>
