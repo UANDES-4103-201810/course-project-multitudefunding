@@ -1,10 +1,6 @@
 class User < ApplicationRecord
-	has_many :project_creators
-	has_many :project_backers
-	has_many :promise_buyers
-	has_many :projects, :through => :project_creators
-	has_many :projects, :through => :project_backers
-	has_many :promises, :through => :promise_buyers
-	validates :email, format: {with: /\A[^@\s]+@[^@\s]+\z/}
-	validates :type_access, inclusion: {in: %w(admin regular)}
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 end
