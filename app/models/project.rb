@@ -5,16 +5,18 @@ class Project < ApplicationRecord
   has_many :project_backers
   has_many :promise_buyers
   has_many :users, :through => :project_creators
-  has_many :users, :through => :project_creators
+  has_many :users, :through => :project_backers
   has_many :promises
   validates :money_goal, numericality: {greater_than: 0}
-  validates :finish_date_after_creation_date
+  validate :finish_date_after_creation_date?
   validates :description, length: { minimum: 10}
+  validates :name, length: { minimum: 2}
 
-  def finish_date_after_creation_date
+  def finish_date_after_creation_date?
     if self.finish_date < Date.today
       errors.add(:finish_date, "Cannot make end date goal in the past")
     end
+    self.finish_date > Date.today
   end
 
 end

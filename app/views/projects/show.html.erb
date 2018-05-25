@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Approved by:</strong>
+  <%= @project.approved_by %>
+</p>
+
+<p>
+  <strong>Money goal:</strong>
+  <%= @project.money_goal %>
+</p>
+
+<p>
+  <strong>Finish date:</strong>
+  <%= @project.finish_date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @project.approved %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @project.rating %>
+</p>
+
+<p>
+  <strong>Founded:</strong>
+  <%= @project.founded %>
+</p>
+
+<p>
+  <strong>Foundation date:</strong>
+  <%= @project.foundation_date %>
+</p>
+
+<p>
+  <strong>Approval date:</strong>
+  <%= @project.approval_date %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
