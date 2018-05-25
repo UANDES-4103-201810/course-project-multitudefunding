@@ -3,7 +3,7 @@ class CreatePromises < ActiveRecord::Migration[5.1]
     create_table :promises do |t|
       t.string :name
       t.references :project, foreign_key: true
-      t.text :decription
+      t.text :description
       t.integer :price
 
       t.timestamps

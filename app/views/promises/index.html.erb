@@ -18,9 +18,9 @@
         <td><%= promise.name %></td>
         <td><%= promise.price %></td>
         <td><%= promise.description %></td>
-        <td><%= link_to 'Show', promise %></td>
-        <td><%= link_to 'Edit', edit_promise_path(promise) %></td>
-        <td><%= link_to 'Destroy', promise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_promise_path(@project,promise) %></td>
+        <td><%= link_to 'Edit', edit_project_promise_path(@project,promise) %></td>
+        <td><%= link_to 'Destroy', project_promise_path(@project,promise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Promise', new_promise_path %>
+<%= link_to 'New Promise', new_project_promise_path(@project) %>

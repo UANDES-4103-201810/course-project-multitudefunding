@@ -8,6 +8,7 @@ class Project < ApplicationRecord
   has_many :backers, :through => :project_backers, source: :project
   has_many :buyers, :through => :promise_buyers, source: :project
   has_many :promises
+  accepts_nested_attributes_for :promises
   validates :money_goal, numericality: {greater_than: 0}
   validate :finish_date_after_creation_date?
   validates :description, length: { minimum: 10}

@@ -4,7 +4,8 @@ class PromisesController < ApplicationController
   # GET /promises
   # GET /promises.json
   def index
-    @promises = Promise.all
+    @project = Project.find(params[:project_id]) 
+    @promises = @project.promises
   end
 
   # GET /promises/1
@@ -14,25 +15,27 @@ class PromisesController < ApplicationController
 
   # GET /promises/new
   def new
-    @promise = Promise.new
+    @project = Project.find(params[:project_id])
+    @promise = @project.promises.build
   end
 
   # GET /promises/1/edit
   def edit
+    @project = Project.find(params[:project_id])
   end
 
   # POST /promises
   # POST /promises.json
   def create
-    @promise = Promise.new(promise_params)
-
+    @project = Project.find(params[:project_id])
+    @promise = @project.promises.new(promise_params)
     respond_to do |format|
       if @promise.save
-        format.html { redirect_to @promise, notice: 'Promise was successfully created.' }
+        format.html { redirect_to [@project,@promise], notice: 'Promise was successfully created.' }
         format.json { render :show, status: :created, location: @promise }
       else
         format.html { render :new }
-        format.json { render json: @promise.errors, status: :unprocessable_entity }
+        format.json { render json: [@project,@promise].errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,9 +43,10 @@ class PromisesController < ApplicationController
   # PATCH/PUT /promises/1
   # PATCH/PUT /promises/1.json
   def update
+    @project = Project.find(params[:project_id])
     respond_to do |format|
       if @promise.update(promise_params)
-        format.html { redirect_to @promise, notice: 'Promise was successfully updated.' }
+        format.html { redirect_to [@project,@promise], notice: 'Promise was successfully updated.' }
         format.json { render :show, status: :ok, location: @promise }
       else
         format.html { render :edit }
@@ -54,9 +58,10 @@ class PromisesController < ApplicationController
   # DELETE /promises/1
   # DELETE /promises/1.json
   def destroy
+    @project = Project.find(params[:project_id])
     @promise.destroy
     respond_to do |format|
-      format.html { redirect_to promises_url, notice: 'Promise was successfully destroyed.' }
+      format.html { redirect_to project_promises_url(@project), notice: 'Promise was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
