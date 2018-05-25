@@ -7,7 +7,7 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.datetime :finish_date
       t.text :description
       t.boolean :approved, default: false
-      t.float :rating
+      t.float :rating, default: nil, null: true
       t.boolean :founded, default: false
       t.datetime :foundation_date, default: nil 
       t.datetime :approval_date, default: nil
