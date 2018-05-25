@@ -10,12 +10,10 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= form.label :approved_by %>
-    <%= form.number_field :approved_by, id: :project_approved_by %>
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :project_name %>
   </div>
-
   <div class="field">
     <%= form.label :money_goal %>
     <%= form.number_field :money_goal, id: :project_money_goal %>
@@ -30,32 +28,7 @@
     <%= form.label :description %>
     <%= form.text_area :description, id: :project_description %>
   </div>
-
-  <div class="field">
-    <%= form.label :approved %>
-    <%= form.check_box :approved, id: :project_approved %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rating %>
-    <%= form.text_field :rating, id: :project_rating %>
-  </div>
-
-  <div class="field">
-    <%= form.label :founded %>
-    <%= form.check_box :founded, id: :project_founded %>
-  </div>
-
-  <div class="field">
-    <%= form.label :foundation_date %>
-    <%= form.datetime_select :foundation_date, id: :project_foundation_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :approval_date %>
-    <%= form.datetime_select :approval_date, id: :project_approval_date %>
-  </div>
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>

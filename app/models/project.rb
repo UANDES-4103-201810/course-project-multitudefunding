@@ -1,11 +1,12 @@
 class Project < ApplicationRecord
-  belongs_to :user, :foreign_key => 'approved_by'
+  belongs_to :user, optional: true, :foreign_key => 'approved_by'
   has_and_belongs_to_many :categories
   has_many :project_creators
   has_many :project_backers
   has_many :promise_buyers
-  has_many :users, :through => :project_creators
-  has_many :users, :through => :project_backers
+  has_many :creators, :through => :project_creators, source: :project
+  has_many :backers, :through => :project_backers, source: :project
+  has_many :buyers, :through => :promise_buyers, source: :project
   has_many :promises
   validates :money_goal, numericality: {greater_than: 0}
   validate :finish_date_after_creation_date?
