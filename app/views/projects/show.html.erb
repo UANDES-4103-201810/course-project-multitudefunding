@@ -44,6 +44,9 @@
   <strong>Approval date:</strong>
   <%= @project.approval_date %>
 </p>
+<p>
+  <%= image_tag @project.main_image.url(:thumb) %>
+</p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

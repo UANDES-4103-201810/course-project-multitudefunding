@@ -10,21 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525043846) do
+ActiveRecord::Schema.define(version: 20180525053650) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "categories_projects", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_projects_on_category_id"
-    t.index ["project_id"], name: "index_categories_projects_on_project_id"
   end
 
   create_table "project_backers", force: :cascade do |t|
@@ -48,17 +39,22 @@ ActiveRecord::Schema.define(version: 20180525043846) do
   end
 
   create_table "projects", force: :cascade do |t|
+    t.string "name"
     t.integer "approved_by"
     t.integer "money_goal"
     t.datetime "finish_date"
     t.text "description"
-    t.boolean "approved"
+    t.boolean "approved", default: false
     t.float "rating"
-    t.boolean "founded"
+    t.boolean "founded", default: false
     t.datetime "foundation_date"
     t.datetime "approval_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "main_image_file_name"
+    t.string "main_image_content_type"
+    t.integer "main_image_file_size"
+    t.datetime "main_image_updated_at"
   end
 
   create_table "promise_buyers", force: :cascade do |t|
@@ -72,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180525043846) do
   end
 
   create_table "promises", force: :cascade do |t|
+    t.string "name"
     t.integer "project_id"
     t.text "decription"
     t.integer "price"

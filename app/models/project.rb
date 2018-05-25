@@ -8,6 +8,8 @@ class Project < ApplicationRecord
   has_many :backers, :through => :project_backers, source: :project
   has_many :buyers, :through => :promise_buyers, source: :project
   has_many :promises
+  has_attached_file :main_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :main_image, content_type: /\Aimage\/.*\z/
   validates :money_goal, numericality: {greater_than: 0}
   validate :finish_date_after_creation_date?
   validates :description, length: { minimum: 10}
