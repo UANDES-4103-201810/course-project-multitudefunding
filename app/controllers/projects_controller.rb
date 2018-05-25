@@ -10,11 +10,19 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    is_creator = false
+    if @project.creators.include?(current_user)
+      is_creator = true
+    end
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+  end
+
+  def new_promise
+    @project
   end
 
   # GET /projects/1/edit
@@ -24,15 +32,18 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_create_params)
-    @poject_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      @project = Project.new(project_create_params)
+      respond_to do |format|
+        if @project.save
+          @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
+          @project_creator.save
+          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.json { render :show, status: :created, location: @project }
+        else
+          format.html { render :new }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
