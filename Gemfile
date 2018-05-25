@@ -37,6 +37,8 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'rails_bootstrap_navbar'
 gem 'autoprefixer-rails'
 gem 'jquery-rails'
+gem 'faker'
+gem 'database_cleaner'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
