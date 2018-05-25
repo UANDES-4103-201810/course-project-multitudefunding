@@ -26,12 +26,13 @@ User.create!(name: 'admin',
                password: "123456",
                user_type: "generic"
                )
-  Project.create!(approved_by: User.find_by(name: 'admin', type: 'admin').id,
-                  money_goal: rand.(10000..10000000),
-                  finish_date: Faker::DateTime.forward(1000),
+  Project.create!(approved_by: User.find_by(name: 'admin', user_type: 'admin').id,
+                  money_goal: rand(10000..10000000),
+                  finish_date: Faker::Date.forward(1000),
                   description: Faker::Lorem.sentence,
-                  founded: False,
-                  approval_date: Datetime.now()
+                  founded: false,
+                  approval_date: Datetime.now(),
+                  name: Faker::Lorem.unique.word
                   )
 end
 
