@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525053650) do
+ActiveRecord::Schema.define(version: 20180525025302) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20180525053650) do
   create_table "promises", force: :cascade do |t|
     t.string "name"
     t.integer "project_id"
-    t.text "decription"
+    t.text "description"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20180525053650) do
     t.string "last_name"
     t.string "nickname"
     t.string "phone_number"
-    t.string "user_type"
+    t.string "user_type", default: "generic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

@@ -2,5 +2,5 @@
 
 <%= render 'form', promise: @promise %>
 
-<%= link_to 'Show', @promise %> |
-<%= link_to 'Back', promises_path %>
+<%= link_to 'Show', project_promise_path(@project,@promise) %> |
+<%= link_to 'Back', project_promises_path(@project) %>
