@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
+  approved_by: 1
   money_goal: 1
-  finish_date: 2018-04-11 11:55:03
+  finish_date: 2018-05-24 19:57:46
   description: MyText
   approved: false
-  rating: 
+  rating: 1.5
   founded: false
-  foundation_date: 2018-04-11 11:55:03
-  approval_date: 2018-04-11 11:55:03
+  foundation_date: 2018-05-24 19:57:46
+  approval_date: 2018-05-24 19:57:46
 
 two:
-  user: two
+  approved_by: 1
   money_goal: 1
-  finish_date: 2018-04-11 11:55:03
+  finish_date: 2018-05-24 19:57:46
   description: MyText
   approved: false
-  rating: 
+  rating: 1.5
   founded: false
-  foundation_date: 2018-04-11 11:55:03
-  approval_date: 2018-04-11 11:55:03
+  foundation_date: 2018-05-24 19:57:46
+  approval_date: 2018-05-24 19:57:46
