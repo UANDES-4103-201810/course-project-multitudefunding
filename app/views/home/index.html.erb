@@ -1,16 +1,63 @@
-                <ul>
+<ul>
 			
-			<h1> Welcome to Multitude Founding</h1>
-			
- 			<% if user_signed_in? %>
-				<%else%>
-<h2><%= link_to('Login', new_user_session_path) %> if you have an account</h2>
-                        	<h3> or <%= link_to 'Sign Up', new_user_registration_path %> if you're new </h3>
-			<% end %>
-                </ul>
-								<footer class="footer">
-									<div class="container">
-                								<span class="text-muted"><p>Sebastian Baixas<br/>
-                								Ignacio Carril</p></span>
-									</div>
-								</footer>
+	<h1> Welcome to Multitude Founding</h1>
+	
+	<% if user_signed_in? %>
+		<% if current_user.user_type == "admin" %>
+			<h3> Welcome Admin! </h3>
+		<% else %>
+		<div>
+			<h2>Created Projects</h2>
+			<table>
+			  <thead>
+			    <tr>
+			      <th>Name</th>
+			      <th>Description</th>
+			      <th>Rating</th>
+			      <th>Money goal</th>
+			      <th>Finish date</th>
+			      <th>Approved</th>
+			      <th>Approved by</th>
+			      <th>Approval date</th>
+			      <th>Founded</th>
+			      <th>Foundation date</th>
+			      <th colspan="3"></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @projects.each do |project| %>
+			      <tr>
+			      	<td><%= project.name %></td>
+			      	<td><%= project.description %></td>
+			        <td><%= project.rating %></td>
+			        <td><%= project.money_goal %></td>
+			        <td><%= project.finish_date %></td>
+			        
+			        <td><%= project.approved %></td>
+			        <td><%= project.approved_by %></td>
+			        <td><%= project.approval_date %></td>
+			    
+			        <td><%= project.founded %></td>
+			        <td><%= project.foundation_date %></td>
+			        
+			        <td><%= link_to 'Show', project %></td>
+			        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+			        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		</div>
+		<% end %>
+	<%else%>
+		<h2><%= link_to('Login', new_user_session_path) %> if you have an account</h2>
+    	<h3> or <%= link_to 'Sign Up', new_user_registration_path %> if you're new </h3>
+	<% end %>
+</ul>
+<footer class="footer">
+	<div class="container">
+				<span class="text-muted"><p>Sebastian Baixas<br/>
+				Ignacio Carril</p></span>
+	</div>
+</footer>

@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.string :nickname
       t.string :phone_number
-      t.string :type
+      t.string :user_type, default: "generic"
       t.timestamps
     end
   end
