@@ -19,7 +19,14 @@
     <%= form.label :description %>
     <%= form.text_area :description, id: :project_description %>
   </div>
-  
+  <div>
+    <img src="<% @project.main_image.url(:medium)%>">
+  </div>
+  <div class="field">
+    <%= form.label :main_image, class: 'col-sm-6 control-label' %>
+    <%= form.file_field :main_image %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

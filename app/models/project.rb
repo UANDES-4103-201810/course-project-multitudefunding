@@ -8,7 +8,12 @@ class Project < ApplicationRecord
   has_many :backers, :through => :project_backers, source: :project
   has_many :buyers, :through => :promise_buyers, source: :project
   has_many :promises
+<<<<<<< HEAD
+  has_attached_file :main_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :main_image, content_type: /\Aimage\/.*\z/
+=======
   accepts_nested_attributes_for :promises
+>>>>>>> 7f38dd511407ccd4cc08e965ad3cd7fddf7985fd
   validates :money_goal, numericality: {greater_than: 0}
   validate :finish_date_after_creation_date?
   validates :description, length: { minimum: 10}

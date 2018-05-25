@@ -1,4 +1,4 @@
-<%= form_with(model: project, local: true) do |form| %>
+<%= form_with(model: project, local: true, html: {multipart: true}) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -18,7 +18,7 @@
     <%= form.label :money_goal %>
     <%= form.number_field :money_goal, id: :project_money_goal %>
   </div>
-
+l
   <div class="field">
     <%= form.label :finish_date %>
     <%= form.datetime_select :finish_date, id: :project_finish_date %>
@@ -27,6 +27,10 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description, id: :project_description %>
+  </div>
+  <div class="field">
+    <%= form.label :main_image, class: 'col-sm-6 control-label' %>
+    <%= form.file_field :main_image %>
   </div>
   
   <div class="actions">
