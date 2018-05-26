@@ -26,6 +26,8 @@
 					<% if user_signed_in? %>
 						<% if current_user.user_type == "admin" %>
 							<li><%= link_to('Projects', projects_path) %></li>
+							<li><%= link_to('Users', projects_path) %></li>
+							<li><%= link_to('Categories', projects_path) %></li>
 						<% else %>
 							<li><%= link_to('Projects', projects_path) %></li>
 							<li><%= link_to('Owned Projects', user_show_owned_path) %></li>
@@ -40,6 +42,7 @@
 								<%= current_user.nickname %>
 							<% end %>
 						</li>
+						<li><%= link_to current_user.nickname, edit_user_registration_path %></li>
 						<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 					<% else %>
 						<li><%= link_to('Sign in', new_user_session_path) %></li>
