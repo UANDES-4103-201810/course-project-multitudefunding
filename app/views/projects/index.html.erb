@@ -2,7 +2,7 @@
 
 <h1>Projects</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Approved by</th>
@@ -31,7 +31,7 @@
         <td><%= project.founded %></td>
         <td><%= project.foundation_date %></td>
         <td><%= project.approval_date %></td>
-        <td><%= image_tag project.main_image.url(:thumb)%></td>
+        <td><%= image_tag project.main_image.url, :size => "100x100"%></td>
         <td><%= link_to 'Show', project %></td>
         <% if project.creators.include?(current_user) %>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
