@@ -9,6 +9,8 @@ require 'faker'
 
 DatabaseCleaner.clean_with(:truncation)
 
+Category.create!(name: 'Electronics')
+
 User.create!(name: 'admin',
              last_name: Faker::Name.last_name,
              nickname: Faker::LeagueOfLegends.unique.champion,
@@ -17,6 +19,7 @@ User.create!(name: 'admin',
              password: '123456',
              user_type: 'admin'
 )
+=begin
 10.times do |index|
   User.create!(name: Faker::Name.first_name,
                last_name: Faker::Name.last_name,
@@ -35,4 +38,5 @@ User.create!(name: 'admin',
                   name: Faker::Lorem.unique.word
                   )
 end
+=end
 

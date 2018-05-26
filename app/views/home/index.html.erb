@@ -6,7 +6,10 @@
 		<% if current_user.user_type == "admin" %>
 			<h3> Welcome Admin! </h3>
 		<% else %>
-		<div>
+      <% if @created_projects.nil? %>
+        <p>No projects to show</p>
+      <% else %>
+    <div>
 			<h2>Created Projects</h2>
 			<table>
 			  <thead>
@@ -49,6 +52,7 @@
 			  </tbody>
 			</table>
 		</div>
+      <% end %>
 		<% end %>
 	<%else%>
 		<h2><%= link_to('Login', new_user_session_path) %> if you have an account</h2>

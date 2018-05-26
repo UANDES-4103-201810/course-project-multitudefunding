@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Projects</h1>
+<% @projects %>
 <% if user_signed_in? %>
+  <% unless @projects.nil? %>
 <table>
   <thead>
     <tr>
@@ -15,6 +17,7 @@
       <th>Approval date</th>
       <th>Founded</th>
       <th>Foundation date</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,7 +37,7 @@
     
         <td><%= project.founded %></td>
         <td><%= project.foundation_date %></td>
-        
+        <td><%= image_tag project.main_image.url(:thumb) %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -42,12 +45,13 @@
     <% end %>
   </tbody>
 </table>
-
+  <% else %>
+    <p>You have no projects</p>
+  <% end %>
 <br>
-
 <%= link_to 'New Project', new_project_path %>
 <% else %>
 <h2> You must have an account to be able to create a new project </h2>
-<h3><%= link_to('Login', new_user_session_path) %> if you have an account</h2>
+<h2><%= link_to('Login', new_user_session_path) %> if you have an account</h2>
 <h3> or <%= link_to 'Sign Up', new_user_registration_path %> if you're new </h3>
 <% end %>
