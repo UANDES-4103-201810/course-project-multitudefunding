@@ -14,6 +14,7 @@
       <th>Founded</th>
       <th>Foundation date</th>
       <th>Approval date</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,6 +31,7 @@
         <td><%= project.founded %></td>
         <td><%= project.foundation_date %></td>
         <td><%= project.approval_date %></td>
+        <td><%= image_tag project.main_image.url(:thumb)%></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

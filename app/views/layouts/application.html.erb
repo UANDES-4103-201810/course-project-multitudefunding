@@ -25,6 +25,9 @@
 				<ul class="nav navbar-nav">
 					<li><%= link_to('Projects', project_show_project_path) %></li>
 					<li><%= link_to('Promises', '#') %></li>
+          <% if user_signed_in? and current_user.user_type == 'admin' %>
+          <li><%= link_to('Admin Tools', '#') %></li>
+          <% end %>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<% if user_signed_in? %>
