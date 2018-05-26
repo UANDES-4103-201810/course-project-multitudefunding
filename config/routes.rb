@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 	resources :projects do
 		resources :promises
 	end
-	get 'project/show_project'
+	post 'projects/fund'
 
 	devise_for :users
 	get 'user/show_owned'
