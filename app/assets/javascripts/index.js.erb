@@ -1,8 +1,10 @@
+var path = Routes.projects_fund_path({format: "json"});
+
 $(document).ready(function() {
   $('.fund-btn').click(function(event){
     var id = $(this).data('id')
     $.ajax({
-        url: '<%= projects_fund_path %>',
+        url: path,
         type: "POST",
         dataType: "json",
         data:{project: id},
