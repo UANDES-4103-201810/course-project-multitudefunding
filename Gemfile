@@ -38,6 +38,7 @@ gem 'rails_bootstrap_navbar'
 gem 'autoprefixer-rails'
 gem 'jquery-rails'
 gem 'faker'
+gem "js-routes"
 gem 'database_cleaner'
 gem 'paperclip', '~> 6.0.0'
 group :development, :test do
