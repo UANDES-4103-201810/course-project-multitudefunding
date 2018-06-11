@@ -4,4 +4,10 @@ class UserController < ApplicationController
   			@projects = current_user.created
   		end
   	end
+
+  	def show_funded
+		if user_signed_in?
+  			@projects = current_user.backed
+  		end
+  	end
 end

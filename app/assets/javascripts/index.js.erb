@@ -1,15 +1,17 @@
 var path = Routes.projects_fund_path({format: "json"});
 
 $(document).ready(function() {
-  $('.fund-btn').click(function(event){
-    var id = $(this).data('id')
+  $(".fund-btn").click(function(event){
+    var project_id = $(this).data('project');
+    var user_id = $(this).data('user');
+    var value = $(this).closest('tr').find(".fund-amount").val();
     $.ajax({
         url: path,
         type: "POST",
         dataType: "json",
-        data:{project: id},
+        data:{project: project_id, user: user_id, money: value},
         success: function(data) {
-        	
+        	    alert("Funding Successful!");
         }
       });
 

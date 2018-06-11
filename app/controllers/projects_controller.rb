@@ -23,13 +23,21 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    unless @project.creators.include?(current_user)
+    puts "Hello"
+    unless @project.creators.exists?(current_user.id)
       redirect_to @project
     end
   end
 
   def fund
-    #ProjectBacker.new()
+    if Project.find(params['project']).backers.exists?(params['user'])
+      
+    else
+      @project_backer = ProjectBacker.new(:project_id => params['project'], :user_id => params['user'], :amount_invested => params['money'])
+      @project_backer.save
+      format.html { redirect_to @project, notice: 'Project was successfully created.' }
+      format.json { render :show, status: :created, location: @project }
+    end
   end
 
   # POST /projects
@@ -41,7 +49,7 @@ class ProjectsController < ApplicationController
         if @project.save
           @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
           @project_creator.save
-          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.html { redirect_to @project, notice: 'Fund Successfully' }
           format.json { render :show, status: :created, location: @project }
         else
           format.html { render :new }
@@ -54,7 +62,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    if @project.creators.include?(current_user)
+    if @project.creators.exists?(current_user.id)
       respond_to do |format|
         if @project.update(project_update_params)
           format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -70,7 +78,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    if @project.creators.include?(current_user)
+    if @project.creators.exists?(current_user.id)
       @project.destroy
       respond_to do |format|
         format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
