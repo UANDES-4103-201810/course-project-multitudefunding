@@ -24,23 +24,12 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
-
+  <strong>Description</strong>
+  <%= markdown(@user.description) %>
 </p>
 
-<p>
-  <strong>Founded:</strong>
-  false
-</p>
-
-<p>
-  <strong>Foundation date:</strong>
-
-</p>
-
-<p>
-  <strong>Approval date:</strong>
-</p>
 <% if current_user = @user %>
-<%= link_to edit_user_registration_path do %>
+<%= link_to edit_user_registration_path do%>
+    <p>edit</p>
+    <% end %>
 <% end %>

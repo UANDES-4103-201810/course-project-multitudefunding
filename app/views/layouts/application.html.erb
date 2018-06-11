@@ -39,7 +39,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<% if user_signed_in? %>
 						<li>
-							<%= link_to edit_user_registration_path do %>
+							<%= link_to user_show_profile_path do %>
 								<%= current_user.nickname %>
 							<% end %>
 						</li>

@@ -41,6 +41,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <% f.label :description %> <i>You can use Markdown for this</i>
+    <%= f.text_area :description, :cols => "30", :rows => "10" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

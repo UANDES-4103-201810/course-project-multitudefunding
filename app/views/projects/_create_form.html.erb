@@ -25,7 +25,8 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description, id: :project_description %>
+    <%= form.text_area :description, :cols => "30", :rows => "10",id: :project_description %>
+    <p>You can user Markdown for links and formatting</p>
   </div>
   <div class="field">
     <%= form.label :main_image, class: 'col-sm-6 control-label' %>
