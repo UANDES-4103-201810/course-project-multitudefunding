@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "index.js" %>
+<% end %>
 <p id="notice"><%= notice %></p>
 
 <h1>Projects</h1>
@@ -44,25 +47,8 @@
     <% end %>
   </tbody>
 </table>
-<script>
-  $(document).ready(function() {
-  $('.fund-btn').click(function(event){
-    var id = $(this).data('id')
-    $.ajax({
-        url: '<%= projects_fund_path %>',
-        type: "POST",
-        dataType: "json",
-        data:{project: id},
-        success: function(data) {
-          // something brilliant here 
-        }
-      });
-
-  });
-});
-
-</script>
-
 <br>
 
 <%= link_to 'New Project', new_project_path %>
+
+

@@ -1,0 +1,15 @@
+$(document).ready(function() {
+  $('.fund-btn').click(function(event){
+    var id = $(this).data('id')
+    $.ajax({
+        url: '<%= projects_fund_path %>',
+        type: "POST",
+        dataType: "json",
+        data:{project: id},
+        success: function(data) {
+        	
+        }
+      });
+
+  });
+});
