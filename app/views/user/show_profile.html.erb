@@ -1,26 +1,26 @@
 <p>
-  <strong>Approved by:</strong>
-
+  <strong>Name:</strong>
+  <%= @user.name %>
 </p>
 
 <p>
-  <strong>Money goal:</strong>
-  1231312
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
 </p>
 
 <p>
-  <strong>Finish date:</strong>
-  2020-05-26 01:21:00 UTC
+  <strong>Nickname:</strong>
+  <%= @user.nickname %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  asdasdasdasdasdasd
+  <strong>Phone Number:</strong>
+  <%= @user.phone_number %>
 </p>
 
 <p>
-  <strong>Approved:</strong>
-  false
+  <strong>User type:</strong>
+  <%= @user.user_type %>
 </p>
 
 <p>
@@ -43,3 +43,4 @@
 </p>
 <% if current_user = @user %>
 <%= link_to edit_user_registration_path do %>
+<% end %>
