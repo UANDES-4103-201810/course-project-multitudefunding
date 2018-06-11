@@ -28,6 +28,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def fund
+    
+  end
+
   # POST /projects
   # POST /projects.json
   def create
