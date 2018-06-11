@@ -10,4 +10,9 @@ class UserController < ApplicationController
   			@projects = current_user.backed
   		end
   	end
+	def show_profile
+		if user_signed_in?
+			@user = current_user
+		end
+	end
 end

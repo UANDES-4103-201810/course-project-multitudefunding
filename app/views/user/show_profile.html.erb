@@ -1,0 +1,35 @@
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @user.nickname %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @user.phone_number %>
+</p>
+
+<p>
+  <strong>User type:</strong>
+  <%= @user.user_type %>
+</p>
+
+<p>
+  <strong>Description</strong>
+  <%= markdown(@user.description) %>
+</p>
+
+<% if current_user = @user %>
+<%= link_to edit_user_registration_path do%>
+    <p>edit</p>
+    <% end %>
+<% end %>
