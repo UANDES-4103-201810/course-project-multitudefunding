@@ -4,7 +4,7 @@
 <% @projects %>
 <% if user_signed_in? %>
   <% unless @projects.nil? %>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -37,7 +37,7 @@
     
         <td><%= project.founded %></td>
         <td><%= project.foundation_date %></td>
-        <td><%= image_tag project.main_image.url(:thumb) %></td>
+        <td><%= image_tag project.main_image.url, :size => "100x100" %></td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

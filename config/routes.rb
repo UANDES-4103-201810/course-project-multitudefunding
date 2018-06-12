@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 		resources :promises
 	end
 	post 'projects/fund'
-
+	post 'promises/buy'
 
 
 	devise_for :users
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 	get 'user/show_owned'
 	get 'user/show_funded'
   	get 'user/show_profile'
+  	get 'user/show_bought'
 
 	get 'admin_categories' => 'admin#admin_categories'
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

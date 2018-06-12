@@ -1,0 +1,31 @@
+var path = Routes.promises_buy_path({format: "json"});
+
+$(document).on('turbolinks:load',function() {
+  $(".buy-btn").click(function(event){
+    var promise_id = $(this).data('promise');
+    var user_id = $(this).data('user');
+    $.ajax({
+        url: path,
+        type: "POST",
+        dataType: "json",
+        data:{promise: promise_id, user: user_id},
+        success: function(data) {
+          
+          if(data.status == "Success"){
+            $(".notice").prepend(
+            $('<div id="flash_message"><p>Promise Bought!</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+            })
+          }
+          else{
+            $(".alert").prepend($('<div id="flash_message"><p>Error!</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+            })
+          }
+        }
+      });
+
+  });
+});

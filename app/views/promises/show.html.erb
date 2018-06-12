@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @promise.name %></h1>
+
 <p>
-  <strong>Name:</strong>
-  <%= @promise.name %>
+  <strong>Project:</strong>
+  <%= @promise.project.name %>
 </p>
 
 <p>
@@ -14,6 +16,7 @@
   <strong>Description:</strong>
   <%= @promise.description %>
 </p>
-
-<%= link_to 'Edit', edit_project_promise_path(@promise) %> |
+<% if @promise.project.creators.include?(current_user) %>
+	<%= link_to 'Edit', edit_project_promise_path(@promise) %> |
+<% end %>
 <%= link_to 'Back', project_promises_path %>

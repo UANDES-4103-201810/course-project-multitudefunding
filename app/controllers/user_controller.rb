@@ -15,4 +15,9 @@ class UserController < ApplicationController
 			@user = current_user
 		end
 	end
+	def show_bought
+		if user_signed_in?
+			@promises = current_user.bought
+		end
+	end
 end

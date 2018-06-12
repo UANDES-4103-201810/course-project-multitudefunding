@@ -36,30 +36,19 @@ class ProjectsController < ApplicationController
     if money > 0
       if @project.backers.include?(@user)
           respond_to do |format|
-            format.html
-            format.js {}
-            format.json{
-              render json: {:status => "Success"}
-            }
+            format.json { render json: {"status" => "Success"}}
           end
       else
         @project_backer = ProjectBacker.new(:project_id => @project.id, :user_id => @user.id, :amount_invested => money)
         @project_backer.save
             respond_to do |format|
-              format.html
-              format.js {}
-              format.json{
-                render json: {:status => "Success"}
-              }
+              format.json { render json: {"status" => "Success"}}
+
             end
       end
     else
       respond_to do |format|
-        format.html
-        format.js {}
-        format.json{
-                render json: {:status => "Failure value has to be higher than 1"}
-              }
+        format.json{ render json: {"status" => "Failure"}}
       end
     end
   end

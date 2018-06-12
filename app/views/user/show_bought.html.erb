@@ -1,0 +1,39 @@
+
+<h1>Bought Promises</h1>
+<% if user_signed_in? %>
+  <% unless @promises.nil? %><table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Project</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @promises.each do |promise| %>
+      <tr>
+        <td><%= promise.name %></td>
+        <td><%= promise.price %></td>
+        <td><%= promise.description %></td>
+        <td><%= link_to promise.project.name, project_path(promise.project) %></td>
+        <td><%= link_to 'Show', project_promise_path(promise.project,promise) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <% else %>
+    <p>You have bought no promises</p>
+  <% end %>
+<br>
+<% else %>
+<h2> You must have an account to be able to buy a new promise </h2>
+<h2><%= link_to('Login', new_user_session_path) %> if you have an account</h2>
+<h3> or <%= link_to 'Sign Up', new_user_registration_path %> if you're new </h3>
+<% end %>
+
+
+
+

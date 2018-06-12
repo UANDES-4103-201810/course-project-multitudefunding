@@ -1,8 +1,12 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "promise_index.js" %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Promises</h1>
+<h1><%=@project.name%> Promises</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -19,13 +23,19 @@
         <td><%= promise.price %></td>
         <td><%= promise.description %></td>
         <td><%= link_to 'Show', project_promise_path(@project,promise) %></td>
-        <td><%= link_to 'Edit', edit_project_promise_path(@project,promise) %></td>
-        <td><%= link_to 'Destroy', project_promise_path(@project,promise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @project.creators.include?(current_user) %>
+          <td><%= link_to 'Edit', edit_project_promise_path(@project,promise) %></td>
+          <td><%= link_to 'Destroy', project_promise_path(@project,promise), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td><button class="buy-btn" data-promise= <%= promise.id %> data-user= <%= current_user.id %>>Buy!</button></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Promise', new_project_promise_path(@project) %>
+<% if @project.creators.include?(current_user) %>
+  <%= link_to 'New Promise', new_project_promise_path(@project) %>
+<%end%>
+  <%= link_to 'Back', project_path(@project) %>
