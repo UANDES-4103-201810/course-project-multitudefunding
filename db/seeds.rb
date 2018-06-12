@@ -10,6 +10,8 @@ require 'faker'
 DatabaseCleaner.clean_with(:truncation)
 
 Category.create!(name: 'Electronics')
+Category.create!(name: 'Videogames')
+Category.create!(name: 'Board Games')
 
 User.create!(name: 'admin',
              last_name: Faker::Name.last_name,
