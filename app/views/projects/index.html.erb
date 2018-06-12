@@ -4,14 +4,20 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Projects</h1>
+<div>
+  <%= form_tag(projects_path, method: :get) do %>
+    <%= text_field_tag :term, params[:term] %>
+    <%= submit_tag 'Search', name: nil %>
+  <% end %>
+</div>
 
-<table class="table">
+<table class="table table-striped table-hover">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Approved by</th>
       <th>Money goal</th>
       <th>Finish date</th>
-      <th>Description</th>
       <th>Approved</th>
       <th>Rating</th>
       <th>Founded</th>
@@ -25,10 +31,10 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
+        <td><%= project.name %></td>
         <td><%= project.approved_by %></td>
         <td><%= project.money_goal %></td>
         <td><%= project.finish_date %></td>
-        <td><%= project.description %></td>
         <td><%= project.approved %></td>
         <td><%= project.rating %></td>
         <td><%= project.founded %></td>
