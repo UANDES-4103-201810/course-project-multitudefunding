@@ -24,19 +24,43 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     puts "Hello"
-    unless @project.creators.exists?(current_user.id)
+    unless @project.creators.include?(current_user)
       redirect_to @project
     end
   end
 
   def fund
-    if Project.find(params['project']).backers.exists?(params['user'])
-      
+    @project = Project.find(params['project'])
+    @user = User.find(params['user'])
+    money = params['money'].to_i
+    if money > 0
+      if @project.backers.include?(@user)
+          respond_to do |format|
+            format.html
+            format.js {}
+            format.json{
+              render json: {:status => "Success"}
+            }
+          end
+      else
+        @project_backer = ProjectBacker.new(:project_id => @project.id, :user_id => @user.id, :amount_invested => money)
+        @project_backer.save
+            respond_to do |format|
+              format.html
+              format.js {}
+              format.json{
+                render json: {:status => "Success"}
+              }
+            end
+      end
     else
-      @project_backer = ProjectBacker.new(:project_id => params['project'], :user_id => params['user'], :amount_invested => params['money'])
-      @project_backer.save
-      format.html { redirect_to @project, notice: 'Project was successfully created.' }
-      format.json { render :show, status: :created, location: @project }
+      respond_to do |format|
+        format.html
+        format.js {}
+        format.json{
+                render json: {:status => "Failure value has to be higher than 1"}
+              }
+      end
     end
   end
 
@@ -62,7 +86,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    if @project.creators.exists?(current_user.id)
+    if @project.creators.include?(current_user)
       respond_to do |format|
         if @project.update(project_update_params)
           format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -78,7 +102,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    if @project.creators.exists?(current_user.id)
+    if @project.creators.include?(current_user)
       @project.destroy
       respond_to do |format|
         format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
