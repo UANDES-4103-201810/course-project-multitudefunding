@@ -32,6 +32,16 @@
     <%= form.label :main_image, class: 'col-sm-6 control-label' %>
     <%= form.file_field :main_image %>
   </div>
+
+  <div class="field">
+    <%= form.label :categories %>
+    <%= form.collection_check_boxes :categories_names, Category.all, :id, :name do |b| %>
+    <div class="collection-check-box">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+    <% end %>
+  </div>
   
   <div class="actions">
     <%= form.submit %>

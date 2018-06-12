@@ -1,5 +1,7 @@
 class Project < ApplicationRecord
   belongs_to :user, optional: true, :foreign_key => 'approved_by'
+  # has_many :categorizations
+  # has_many :categories, through: :categorizations
   has_and_belongs_to_many :categories
   has_many :project_creators
   has_many :project_backers
