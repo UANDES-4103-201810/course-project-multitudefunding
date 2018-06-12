@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @project.name %> </h1>
 <p>
-  <strong>Approved by:</strong>
-  <%= @project.approved_by %>
+  <strong>Current Money:</strong>
+  <% amount = 0 %>
+  <% @project.project_backers.each { |backer| amount += backer.amount_invested }%>
+  <% @project.promises.each { |promise| promise.promise_buyers.each { amount += promise.price } }%>
+  <%= amount %>
 </p>
 
 <p>
