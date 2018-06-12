@@ -28,7 +28,7 @@
 					<% if user_signed_in? %>
 						<% if current_user.user_type == "admin" %>
 							<li><%= link_to('Projects', projects_path, method: :get) %></li>
-							<li><%= link_to('Users', projects_path) %></li>
+							<li><%= link_to('Users', admin_users_path) %></li>
 							<li><%= link_to('Categories', admin_categories_path) %></li>
 						<% else %>
 							<li><%= link_to('Projects', projects_path, method: :get) %></li>
