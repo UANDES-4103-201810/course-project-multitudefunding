@@ -23,13 +23,45 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    puts "Hello"
     unless @project.creators.include?(current_user)
       redirect_to @project
     end
   end
 
   def fund
-    #ProjectBacker.new()
+    @project = Project.find(params['project'])
+    @user = User.find(params['user'])
+    money = params['money'].to_i
+    if money > 0
+      if @project.backers.include?(@user)
+          respond_to do |format|
+            format.html
+            format.js {}
+            format.json{
+              render json: {:status => "Success"}
+            }
+          end
+      else
+        @project_backer = ProjectBacker.new(:project_id => @project.id, :user_id => @user.id, :amount_invested => money)
+        @project_backer.save
+            respond_to do |format|
+              format.html
+              format.js {}
+              format.json{
+                render json: {:status => "Success"}
+              }
+            end
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.js {}
+        format.json{
+                render json: {:status => "Failure value has to be higher than 1"}
+              }
+      end
+    end
   end
 
   # POST /projects
@@ -41,7 +73,7 @@ class ProjectsController < ApplicationController
         if @project.save
           @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
           @project_creator.save
-          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.html { redirect_to @project, notice: 'Fund Successfully' }
           format.json { render :show, status: :created, location: @project }
         else
           format.html { render :new }

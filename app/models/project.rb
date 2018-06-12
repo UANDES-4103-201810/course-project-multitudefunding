@@ -6,9 +6,9 @@ class Project < ApplicationRecord
   has_many :project_creators
   has_many :project_backers
   has_many :promise_buyers
-  has_many :creators, :through => :project_creators, source: :project
-  has_many :backers, :through => :project_backers, source: :project
-  has_many :buyers, :through => :promise_buyers, source: :project
+  has_many :creators, :through => :project_creators, source: :user
+  has_many :backers, :through => :project_backers, source: :user
+  has_many :buyers, :through => :promise_buyers, source: :user
   has_many :promises
   has_attached_file :main_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :main_image, content_type: /\Aimage\/.*\z/

@@ -40,8 +40,9 @@
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
           <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
-          <td><label>Fund Amount</label><input type="number"/></td> 
-          <td><button class="fund-btn" data-id= <%= project.id %> > </button></td>
+          <td><label>Fund Amount</label><br/><input class="fund-amount" type="number"/></td> 
+          <td><button class="fund-btn" data-project= <%= project.id %> data-user= <%= current_user.id %>>Fund Now!</button>
+          </td>
         <% end %>
       </tr>
     <% end %>
