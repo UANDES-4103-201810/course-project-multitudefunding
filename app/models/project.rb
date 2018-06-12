@@ -2,7 +2,7 @@ class Project < ApplicationRecord
   belongs_to :user, optional: true, :foreign_key => 'approved_by'
   # has_many :categorizations
   # has_many :categories, through: :categorizations
-  has_and_belongs_to_many :categories
+  has_many :categories
   has_many :project_creators
   has_many :project_backers
   has_many :promise_buyers
@@ -24,5 +24,14 @@ class Project < ApplicationRecord
     end
     self.finish_date > Date.today
   end
+
+  def self.search(term)
+    if term
+      where('name LIKE ?', "%#{term}%")
+    else
+      all
+    end
+  end
+
 
 end

@@ -16,11 +16,6 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= markdown(@project.description) %>
-</p>
-
-<p>
   <strong>Approved:</strong>
   <%= @project.approved %>
 </p>
@@ -48,5 +43,11 @@
   <%= image_tag @project.main_image.url(:thumb) %>
 </p>
 
+<!--<p>-->
+<!--  <strong>Categories: </strong>-->
+  <%# @categorize.each do |c| %>
+  <%#= c.name %>
+  <%# end %>
+<!--</p>-->
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

@@ -4,8 +4,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.search(params[:term])
   end
+
 
   # GET /projects/1
   # GET /projects/1.json
@@ -14,10 +15,12 @@ class ProjectsController < ApplicationController
     if @project.creators.include?(current_user)
       is_creator = true
     end
+    @categorize = @project.categories
   end
 
   # GET /projects/new
   def new
+    @categories = Category.all
     @project = Project.new
   end
 
@@ -68,12 +71,17 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     if user_signed_in?
+      # categories = project_create_params['categories_names']
+      # project_create_params.delete 'categories_names'
       @project = Project.new(project_create_params)
       respond_to do |format|
         if @project.save
           @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
           @project_creator.save
-          format.html { redirect_to @project, notice: 'Fund Successfully' }
+          # categories.each  do |cat_id|
+          #   @category_project = CategoriesProject.new(:project_id => @project.id, :category_id => cat_id)
+          # end
+          format.html { redirect_to @project, notice: 'Project Successfully Created' }
           format.json { render :show, status: :created, location: @project }
         else
           format.html { render :new }
@@ -116,7 +124,6 @@ class ProjectsController < ApplicationController
     def set_project
       @project = Project.find(params[:id])
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_create_params
       params.require(:project).permit(:name, :money_goal, :finish_date, :description, :main_image)
