@@ -4,6 +4,11 @@
 <p>
   <strong>Approved by:</strong>
   <%= User.find(@project.approved_by).nickname %>
+  <strong>Current Money:</strong>
+  <% amount = 0 %>
+  <% @project.project_backers.each { |backer| amount += backer.amount_invested }%>
+  <% @project.promises.each { |promise| promise.promise_buyers.each { amount += promise.price } }%>
+  <%= amount %>
 </p>
 <% end %>
 <p>

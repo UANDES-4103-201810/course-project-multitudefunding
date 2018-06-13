@@ -44,7 +44,7 @@
         <td><%= link_to 'Show', project %></td>
         <% if project.creators.include?(current_user) %>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
           <td><label>Fund Amount</label><br/><input class="fund-amount" type="number"/></td> 
           <td><button class="fund-btn" data-project= <%= project.id %> data-user= <%= current_user.id %>>Fund Now!</button>

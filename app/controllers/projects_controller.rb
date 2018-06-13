@@ -38,9 +38,13 @@ class ProjectsController < ApplicationController
     money = params['money'].to_i
     if money > 0
       if @project.backers.include?(@user)
-          respond_to do |format|
-            format.json { render json: {"status" => "Success"}}
-          end
+        @backer = ProjectBacker.find_by_user_id_and_project_id(@user.id, @project.id)
+        invested = @backer.amount_invested
+        @backer.update(amount_invested: (invested + money))
+        @backer.save
+        respond_to do |format|
+          format.json { render json: {"status" => "Success"}}
+        end
       else
         @project_backer = ProjectBacker.new(:project_id => @project.id, :user_id => @user.id, :amount_invested => money)
         @project_backer.save
@@ -60,15 +64,15 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     if user_signed_in?
-      # categories = project_create_params['categories_names']
-      # project_create_params.delete 'categories_names'
-      @project = Project.new(project_create_params)
+      categories = project_create_params[:categories_names]
+      @project = Project.new(project_create_params.except(:categories_names))
       respond_to do |format|
         if @project.save
           @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
           @project_creator.save
           categories.each  do |cat_id|
-            @category_project = CategoriesProject.new(:project_id => @project.id, :category_id => cat_id)
+             @category_project = CategoriesProject.new(:project_id => @project.id, :category_id => cat_id)
+             @category_project.save()
           end
           format.html { redirect_to @project, notice: 'Project Successfully Created' }
           format.json { render :show, status: :created, location: @project }
@@ -127,7 +131,7 @@ class ProjectsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_create_params
-      params.require(:project).permit(:name, :money_goal, :finish_date, :description, :main_image)
+      params.require(:project).permit(:name, :money_goal, :finish_date, :description, :main_image, :categories_names => [])
     end
     def project_update_params
       params.require(:project).permit(:name, :description, :main_image, :approve, :approved_by, :approval_date)

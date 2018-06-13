@@ -2,13 +2,13 @@ class Project < ApplicationRecord
   belongs_to :user, optional: true, :foreign_key => 'approved_by'
   # has_many :categorizations
   # has_many :categories, through: :categorizations
-  has_many :categories
-  has_many :project_creators
-  has_many :project_backers
-  has_many :promise_buyers
+  has_many :categories_projects, dependent: :destroy
+  has_many :categories, :through => :categories_projects, source: :category
+  has_many :project_creators, dependent: :destroy
+  has_many :project_backers, dependent: :destroy
   has_many :creators, :through => :project_creators, source: :user
   has_many :backers, :through => :project_backers, source: :user
-  has_many :promises
+  has_many :promises, dependent: :delete_all
   has_attached_file :main_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :main_image, content_type: /\Aimage\/.*\z/
   accepts_nested_attributes_for :promises
