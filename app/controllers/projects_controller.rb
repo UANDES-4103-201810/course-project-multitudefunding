@@ -53,6 +53,16 @@ class ProjectsController < ApplicationController
 
             end
       end
+      amount = 0
+      @project.project_backers.each { |backer| amount += backer.amount_invested }
+      @project.promises.each { |promise| promise.promise_buyers.each { amount += promise.price } }
+      if !@project.founded && amount >= @project.money_goal
+        @project.founded = true
+        @project.foundation_date = DateTime.now
+        @project.save
+        UserMailer.project_founded_email(@project).deliver
+      end
+      UserMailer.fund_email(@user, money, @project).deliver
     else
       respond_to do |format|
         format.json{ render json: {"status" => "Failure"}}
@@ -120,6 +130,10 @@ class ProjectsController < ApplicationController
         respond_to do |format|
           format.html { redirect_to @project , notice: 'Project has been approved' }
         end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @project , notice: 'Not enough privileges to approve project' }
       end
     end
   end
