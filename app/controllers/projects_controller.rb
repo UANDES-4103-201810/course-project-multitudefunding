@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     if @project.creators.include?(current_user)
       is_creator = true
     end
-    @categories = CategoriesProject.find_by( :project_id => @project.id )
+    @categories = @project.categories
   end
 
   # GET /projects/new
