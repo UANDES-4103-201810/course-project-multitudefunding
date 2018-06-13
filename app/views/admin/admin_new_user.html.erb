@@ -2,11 +2,11 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-	
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true%>
-  </div> 
+  </div>
 
   <div class="field">
     <%= f.label :last_name %><br />
@@ -21,7 +21,7 @@
   <div class="field">
     <%= f.label :phone_number %><br />
     <%= f.text_field :phone_number%>
-  </div> 
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -31,7 +31,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
@@ -47,14 +47,15 @@
     <p>You can use Markdown for this</p>
   </div>
   <% if current_user.user_type == "admin" %>
-  <div class="field">
-    <% f.label :user_type %>
-    <% f.check_box( 'user_type', 'is_admin', options = { :checked_value => "admin", :unchecked_value => "generic"}) %>
-  </div>
+    <div class="field">
+      <% f.label :user_type %>
+      <% f.check_box( 'user_type', 'is_admin', options = { :checked_value => "admin", :unchecked_value => "generic"}) %>
+    </div>
   <% end %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
+
 <%= render "devise/shared/links" %>

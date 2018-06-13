@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :project_creators
   has_many :promise_buyers
   has_many :project_backers
+  has_many :projects
   has_many :created, :through => :project_creators, source: :project
   has_many :bought, :through => :promise_buyers, source: :promise
   has_many :backed, :through => :project_backers, source: :project

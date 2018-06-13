@@ -1,13 +1,16 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @project.name %> </h1>
+<% if @project.approved %>
 <p>
+  <strong>Approved by:</strong>
+  <%= User.find(@project.approved_by).nickname %>
   <strong>Current Money:</strong>
   <% amount = 0 %>
   <% @project.project_backers.each { |backer| amount += backer.amount_invested }%>
   <% @project.promises.each { |promise| promise.promise_buyers.each { amount += promise.price } }%>
   <%= amount %>
 </p>
-
+<% end %>
 <p>
   <strong>Money goal:</strong>
   <%= @project.money_goal %>
@@ -42,18 +45,23 @@
   <strong>Approval date:</strong>
   <%= @project.approval_date %>
 </p>
+
+<p>
+  <strong>Categories:</strong>
+  <%= @categories.each do |c| %>
+  <%= c.name %>
+  <% end %>
+</p>
 <p>
   <%= image_tag @project.main_image.url(:thumb) %>
 </p>
 <%= button_to 'Promises', project_promises_path(@project), method: :get %> |
 <%if @project.creators.include?(current_user) %>
-
-<!--<p>-->
-<!--  <strong>Categories: </strong>-->
-  <%# @categorize.each do |c| %>
-  <%#= c.name %>
-  <%# end %>
-<!--</p>-->
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <% end %>
 <%= link_to 'Back', projects_path %>
+<% unless @project.approved %>
+<div>
+  <%= link_to 'Approve', approve_project_path(@project) %>
+</div>
+<% end %>
