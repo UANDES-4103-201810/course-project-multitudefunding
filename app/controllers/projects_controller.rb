@@ -60,9 +60,9 @@ class ProjectsController < ApplicationController
         @project.founded = true
         @project.foundation_date = DateTime.now
         @project.save
-        UserMailer.project_founded_email(@project).deliver
+        UserMailer.project_founded_email(@project).deliver_later
       end
-      UserMailer.fund_email(@user, money, @project).deliver
+      UserMailer.fund_email(@user, money, @project).deliver_later
     else
       respond_to do |format|
         format.json{ render json: {"status" => "Failure"}}

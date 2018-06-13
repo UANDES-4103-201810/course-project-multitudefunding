@@ -39,9 +39,9 @@ class PromisesController < ApplicationController
         @project.founded = true
         @project.foundation_date = DateTime.now
         @project.save
-        UserMailer.project_founded_email(@project).deliver
+        UserMailer.project_founded_email(@project).deliver_later
     end
-    UserMailer.promise_email(@user, @promise, @project).deliver
+    UserMailer.promise_email(@user, @promise, @project).deliver_later
     respond_to do |format|
       format.json{ render json: {"status" => "Success"}}
     end
