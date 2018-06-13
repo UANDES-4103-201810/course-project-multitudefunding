@@ -129,6 +129,10 @@ class ProjectsController < ApplicationController
           format.html { redirect_to @project , notice: 'Project has been approved' }
         end
       end
+    else
+      respond_to do |format|
+        format.html { redirect_to @project , notice: 'Not enough privileges to approve project' }
+      end
     end
   end
 

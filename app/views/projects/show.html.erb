@@ -4,6 +4,8 @@
 <p>
   <strong>Approved by:</strong>
   <%= User.find(@project.approved_by).nickname %>
+</p>
+<p>
   <strong>Current Money:</strong>
   <% amount = 0 %>
   <% @project.project_backers.each { |backer| amount += backer.amount_invested }%>
@@ -48,9 +50,7 @@
 
 <p>
   <strong>Categories:</strong>
-  <% @categories.each do |c| %>
-  <%= c.name %>
-  <% end %>
+  <%=@categories.map{|c| c.name}.join(", ")%>
 </p>
 <p>
   <%= image_tag @project.main_image.url(:thumb) %>
@@ -61,7 +61,9 @@
 <% end %>
 <%= link_to 'Back', projects_path %>
 <% unless @project.approved %>
-<div>
-  <%= link_to 'Approve', approve_project_path(@project) %>
-</div>
+<%if current_user.user_type == "admin" %>
+  <div>
+    <%= link_to 'Approve', approve_project_path(@project) %>
+  </div>
+<% end %>
 <% end %>
