@@ -53,6 +53,14 @@ class ProjectsController < ApplicationController
 
             end
       end
+      amount = 0
+      @project.project_backers.each { |backer| amount += backer.amount_invested }
+      @project.promises.each { |promise| promise.promise_buyers.each { amount += promise.price } }
+      if amount >= @project.money_goal
+        @project.founded = true
+        @project.foundation_date = DateTime.now
+        @project.save
+      end
     else
       respond_to do |format|
         format.json{ render json: {"status" => "Failure"}}
