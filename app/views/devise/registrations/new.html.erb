@@ -44,14 +44,12 @@
   <div class="field">
     <% f.label :description %>
     <%= f.text_area :description, :cols => "30", :rows => "10" %>
-    <p>You can use Markdown for this</p>
   </div>
-  <% if current_user.user_type == "admin" %>
-  <div class="field">
-    <% f.label :user_type %>
-    <% f.check_box( 'user_type', 'is_admin', options = { :checked_value => "admin", :unchecked_value => "generic"}) %>
-  </div>
-  <% end %>
+
+<!--  <div class="field">-->
+    <%# f.label :user_type %>
+    <%# f.check_box( 'user_type', 'is_admin', options = { :checked_value => "admin", :unchecked_value => "generic"}) %>
+<!--  </div>-->
 
   <div class="actions">
     <%= f.submit "Sign up" %>
