@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     if @project.creators.include?(current_user)
       is_creator = true
     end
-    @categorize = @project.categories
+    @categories = CategoriesProject.find_by( :project_id => @project.id )
   end
 
   # GET /projects/new
@@ -67,9 +67,9 @@ class ProjectsController < ApplicationController
         if @project.save
           @project_creator = ProjectCreator.new(:user_id => current_user.id, :project_id =>@project.id, :owner => true)
           @project_creator.save
-          # categories.each  do |cat_id|
-          #   @category_project = CategoriesProject.new(:project_id => @project.id, :category_id => cat_id)
-          # end
+          categories.each  do |cat_id|
+            @category_project = CategoriesProject.new(:project_id => @project.id, :category_id => cat_id)
+          end
           format.html { redirect_to @project, notice: 'Project Successfully Created' }
           format.json { render :show, status: :created, location: @project }
         else
@@ -108,6 +108,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def approve
+    @project = Project.find(params[:id])
+    if current_user.user_type == "admin"
+      @project.update_attributes({approved: true, approved_by: current_user.id, approval_date: Time.now })
+      if @project.save
+        respond_to do |format|
+          format.html { redirect_to @project , notice: 'Project has been approved' }
+        end
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -118,7 +130,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:name, :money_goal, :finish_date, :description, :main_image)
     end
     def project_update_params
-      params.require(:project).permit(:name, :description, :main_image)
+      params.require(:project).permit(:name, :description, :main_image, :approve, :approved_by, :approval_date)
     end
     def project_params
       params.require(:project).permit(:approved_by, :money_goal, :finish_date, :description, :approved, :rating, :founded, :foundation_date, :approval_date, :main_image)
