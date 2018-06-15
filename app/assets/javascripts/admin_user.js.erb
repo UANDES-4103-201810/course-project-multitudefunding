@@ -1,0 +1,32 @@
+var path = Routes.admin_promote_path({format: "json"});
+
+$(document).on('turbolinks:load', function() {
+  $(".promote-btn").click(function(event){
+    var promoted_id = $(this).data('promoted');
+    var user_id = $(this).data('user');
+    $.ajax({
+        url: path,
+        type: "POST",
+        dataType: "json",
+        data:{promoted: promoted_id, user: user_id},
+        success: function(data) {
+          
+          if(data.status == "Success"){
+            $(".notice").prepend(
+            $('<div id="flash_message"><p>Successfully Promoted</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+              location.reload();
+            })
+          }
+          else{
+            $(".alert").prepend($('<div id="flash_message"><p>You have no permission for the selected action</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+            })
+          }
+        }
+      });
+
+  });
+});

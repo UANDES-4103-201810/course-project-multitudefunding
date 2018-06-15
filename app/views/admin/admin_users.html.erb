@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "admin_user.js" %>
+<% end %>
+
 <h1>Users</h1>
 <div>
   <%= form_tag(projects_path, method: :get) do %>
@@ -27,7 +31,14 @@
       <td><%= user.last_name %></td>
       <td><%= user.nickname %></td>
       <td><%= user.phone_number %></td>
-      <td><%= user.user_type %></td>
+      <td>
+        <% if user.user_type == "admin" %>
+          <%= "Administrator" %>
+        <% else %>
+          <p><%= "Generic User" %></p>
+          <button class="promote-btn" data-promoted= <%= user.id %> data-user= <%= current_user.id %>>Promote</button>
+        <% end %>
+      </td>
       <td><%= image_tag user.avatar.url, :size => "100x100"%></td>
       <td><%= link_to 'Show', user_show_profile_path %></td>
       <td><%= link_to 'Destroy', user_registration_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>

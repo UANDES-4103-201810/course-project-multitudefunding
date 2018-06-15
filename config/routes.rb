@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 	get 'admin_categories' => 'admin#admin_categories'
 
 	get 'admin_users' => 'admin#admin_users'
+	post 'admin/promote'
 	get 'admin_new_user' => 'admin#new_user'
 
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "promise_index.js" %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <h1><%= @promise.name %></h1>
@@ -16,6 +20,14 @@
   <strong>Description:</strong>
   <%= @promise.description %>
 </p>
+	<%unless @promise.project.creators.include?(current_user) %>
+    <p>
+    <tr>
+      <td><button class="buy-btn" data-promise= <%= @promise.id %> data-user= <%= current_user.id %>>Buy!</button></td>
+    </tr>
+</p>
+  <% end %>
+
 <% if @promise.project.creators.include?(current_user) %>
 	<%= link_to 'Edit', edit_project_promise_path(@promise) %> |
 <% end %>

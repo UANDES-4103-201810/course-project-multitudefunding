@@ -19,7 +19,6 @@
       <th>Money goal</th>
       <th>Finish date</th>
       <th>Approved</th>
-      <th>Rating</th>
       <th>Founded</th>
       <th>Foundation date</th>
       <th>Approval date</th>
@@ -36,14 +35,13 @@
         <td><%= project.money_goal %></td>
         <td><%= project.finish_date %></td>
         <td><%= project.approved %></td>
-        <td><%= project.rating %></td>
         <td><%= project.founded %></td>
         <td><%= project.foundation_date %></td>
         <td><%= project.approval_date %></td>
         <td><%= image_tag project.main_image.url, :size => "100x100"%></td>
         <td><%= link_to 'Show', project %></td>
         <% if project.creators.include?(current_user) %>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Edit', edit_project_path(project), mehtod: :get %></td>
           <td><%= link_to 'Destroy', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
           <td><label>Fund Amount</label><br/><input class="fund-amount" type="number"/></td> 

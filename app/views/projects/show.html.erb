@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "project_show.js" %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 <h1><%= @project.name %> </h1>
 <% if @project.approved %>
@@ -55,6 +59,16 @@
 <p>
   <%= image_tag @project.main_image.url(:thumb) %>
 </p>
+<p>
+  <%unless @project.creators.include?(current_user) %>
+    <tr>
+      <td><label>Fund This Project</label><br/><input class="fund-amount" type="number"/></td> 
+      <td><button class="fund-btn" data-project= <%= @project.id %> data-user= <%= current_user.id %>>Fund Now!</button></td>
+    </tr>
+  <% end %>
+</p>
+
+
 <%= button_to 'Promises', project_promises_path(@project), method: :get %> |
 <%if @project.creators.include?(current_user) %>
 <%= link_to 'Edit', edit_project_path(@project) %> |

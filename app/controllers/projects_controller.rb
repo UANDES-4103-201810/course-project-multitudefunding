@@ -5,6 +5,10 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.search(params[:term])
+    @categories = Category.search(params[:term])
+    @categories.each do |cat|
+        @projects = cat.projects
+    end
   end
 
 

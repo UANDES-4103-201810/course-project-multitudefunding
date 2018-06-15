@@ -1,0 +1,32 @@
+var path = Routes.projects_fund_path({format: "json"});
+
+$(document).on('turbolinks:load', function() {
+  $(".fund-btn").click(function(event){
+    var project_id = $(this).data('project');
+    var user_id = $(this).data('user');
+    var value = $(this).parent().find(".fund-amount").val();
+    $.ajax({
+        url: path,
+        type: "POST",
+        dataType: "json",
+        data:{project: project_id, user: user_id, money: value},
+        success: function(data) {
+          
+          if(data.status == "Success"){
+            $(".notice").prepend(
+            $('<div id="flash_message"><p>Successfully Funded!</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+            })
+          }
+          else{
+            $(".alert").prepend($('<div id="flash_message"><p>Value not Permitted!</p></div>'));
+            $("#flash_message").fadeOut(3000, function(){
+              $(this).remove();
+            })
+          }
+        }
+      });
+
+  });
+});
