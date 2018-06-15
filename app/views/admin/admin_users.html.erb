@@ -40,13 +40,10 @@
         <% end %>
       </td>
       <td><%= image_tag user.avatar.url, :size => "100x100"%></td>
-      <td><%= link_to 'Show', user_show_profile_path %></td>
+
+      <td><%= link_to 'Show', show_profile_admin_path(:user_id => user.id) %></td>
       <td><%= link_to 'Destroy', user_registration_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<br>
-<div>
-  <%= link_to 'New', new_user_registration_path %>
-</div>

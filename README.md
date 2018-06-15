@@ -4,25 +4,22 @@ Participants:
 	-Sebastián Baixas
 	-Ignacio Carril.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To begin, run migrations and seed
+seed will make admin user with: 
+email: mf_admin@mfunding.com
+password: 123456
+and a few categories for default
 
-Things you may want to cover:
+3 - System Access: is done with google auth, doesnt ask for additional data of the user, but logs in and remembers users
 
-* Ruby version
+4 - Platform feedback: there is platform feedback for most, if not all, actions invoked
 
-* System dependencies
+5 - User profile: User profile descriptions and project descriptions use markdown parser from redcarpet gem, visible from their respective show views
 
-* Configuration
+6 - Funding: projects can be funded and mailer has been implemented
 
-* Database creation
+7 - Searching: filters by name only, no filter by category, doesn't search within descriptions either
 
-* Database initialization
+8 - Authorization: Most admin things are behind authorization, however, some last minute additions may not be properly secured.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+9 - Report: this

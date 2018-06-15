@@ -31,12 +31,3 @@
   <strong>Description</strong>
   <%= markdown(@user.description) %>
 </p>
-
-<% if current_user = @user %>
-<%= link_to edit_user_registration_path do%>
-    <p>edit</p>
-    <% end %>
-<% end %>
-<% if current_user.user_type == "admin" and @user.user_type != "admin" %>
-<%= link_to 'Make this user admin', admin_make_admin_path%>
-<% end %>
